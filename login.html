@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in | Smart Education</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="login-page">
+    <main class="login-layout">
+        <section class="login-intro">
+            <a class="brand" href="{{ url_for('login') }}"><span class="brand-mark">SE</span><span><strong>Smart</strong><small>Education</small></span></a>
+            <div class="intro-copy">
+                <p class="eyebrow">Student success, made visible</p>
+                <h1>Turn progress into momentum.</h1>
+                <p>Keep every learner's journey clear, measurable, and moving forward.</p>
+            </div>
+            <div class="intro-footer">Student assessment workspace <span>•</span> 2026</div>
+        </section>
+        <section class="login-panel">
+            <div class="login-card">
+                <p class="eyebrow">Welcome back</p>
+                <h2>Sign in to your workspace</h2>
+                <p class="subheading">Use your administrator account to continue.</p>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% for category, message in messages %}<div class="flash {{ category }}"><span>!</span>{{ message }}</div>{% endfor %}
+                {% endwith %}
+                <form method="POST" class="login-form">
+                    <div><label for="username">Username</label><input id="username" type="text" name="username" autocomplete="username" required></div>
+                    <div><label for="password">Password</label><input id="password" type="password" name="password" autocomplete="current-password" required></div>
+                    <button type="submit">Sign in <span>&rarr;</span></button>
+                </form>
+                <p class="demo-note">Demo access <strong>admin</strong> / <strong>admin123</strong></p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Students | Smart Education{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">Student directory</p><h1>All students</h1><p class="subheading">Browse learners and review their latest performance.</p></div><a class="button" href="{{ url_for('student') }}">+ Register student</a></div>
+<section class="card table-card">
+    {% if students %}
+    <div class="table-wrap"><table>
+        <thead><tr><th>Student</th><th>Course</th><th>Progress</th><th>Status</th><th></th></tr></thead>
+        <tbody>{% for s in students %}
+            <tr><td><strong>{{ s.name }}</strong><small>{{ s.student_id }}</small></td><td>{{ s.course }}</td><td><strong>{{ s.overall_progress }}%</strong></td><td><span class="status {{ s.performance|lower|replace(' ', '-') }}">{{ s.performance }}</span></td><td><a class="table-link" href="{{ url_for('student_progress', student_id=s.student_id) }}">View profile &rarr;</a></td></tr>
+        {% endfor %}</tbody>
+    </table></div>
+    {% else %}<div class="empty-state"><h3>No students yet</h3><p>Use the register action above to add the first learner.</p></div>{% endif %}
+</section>
+{% endblock %}

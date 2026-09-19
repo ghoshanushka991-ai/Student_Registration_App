@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Assessment | Smart Education{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">Learning record</p><h1>Update assessment</h1><p class="subheading">Record the latest outcomes for this student.</p></div></div>
+<section class="card form-card">
+    <div class="profile-header"><div class="profile-avatar">{{ student.name[0]|upper }}</div><div><h2>{{ student.name }}</h2><p>{{ student.student_id }} · {{ student.course }}</p></div></div>
+    <form method="POST">
+        <div class="form-grid">
+            <div class="field"><label for="modules_completed">Modules completed</label><input id="modules_completed" type="number" name="modules_completed" min="0" max="10" value="{{ student.modules_completed }}" required></div>
+            <div class="field"><label for="quiz_score">Quiz score</label><input id="quiz_score" type="number" name="quiz_score" min="0" step="0.01" value="{{ student.quiz_score }}" required></div>
+            <div class="field"><label for="quiz_total">Quiz total marks</label><input id="quiz_total" type="number" name="quiz_total" min="1" step="0.01" value="{{ student.quiz_total }}" required></div>
+            <div class="field"><label for="assignment_status">Assignment status</label><select id="assignment_status" name="assignment_status" required><option value="Pending" {% if student.assignment_status == 'Pending' %}selected{% endif %}>Pending</option><option value="Completed" {% if student.assignment_status == 'Completed' %}selected{% endif %}>Completed</option></select></div>
+            <div class="field"><label for="project_status">Project status</label><select id="project_status" name="project_status" required><option value="Pending" {% if student.project_status == 'Pending' %}selected{% endif %}>Pending</option><option value="Completed" {% if student.project_status == 'Completed' %}selected{% endif %}>Completed</option></select></div>
+        </div>
+        <div class="form-actions"><button type="submit">Save assessment <span>&rarr;</span></button><a class="button secondary" href="{{ url_for('student_progress', student_id=student.student_id) }}">Cancel</a></div>
+    </form>
+</section>
+{% endblock %}

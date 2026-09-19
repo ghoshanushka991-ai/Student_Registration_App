@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Smart Education{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar">
+            <a class="brand" href="{{ url_for('dashboard') }}">
+                <span class="brand-mark">SE</span>
+                <span><strong>Smart</strong><small>Education</small></span>
+            </a>
+
+            <nav class="main-nav" aria-label="Main navigation">
+                <span class="nav-label">Workspace</span>
+                <a class="nav-link {% if request.endpoint == 'dashboard' %}active{% endif %}" href="{{ url_for('dashboard') }}">
+                    <span class="nav-icon">&#9632;</span> Overview
+                </a>
+                <a class="nav-link {% if request.endpoint == 'student_list' %}active{% endif %}" href="{{ url_for('student_list') }}">
+                    <span class="nav-icon">&#9776;</span> Students
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-chip"><span class="avatar">A</span><span><strong>Administrator</strong><small>Workspace owner</small></span></div>
+                <a class="logout-link" href="{{ url_for('logout') }}">Sign out <span>&rarr;</span></a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="mobile-header">
+                <a class="brand" href="{{ url_for('dashboard') }}"><span class="brand-mark">SE</span><span><strong>Smart</strong><small>Education</small></span></a>
+                <a class="mobile-signout" href="{{ url_for('logout') }}">Sign out</a>
+            </header>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-stack" aria-live="polite">
+                        {% for category, message in messages %}
+                            <div class="flash {{ category }}"><span>{{ '✓' if category == 'success' else '!' }}</span>{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</body>
+</html>

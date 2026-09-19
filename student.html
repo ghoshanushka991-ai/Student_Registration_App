@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Register student | Smart Education{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">Student directory</p><h1>Register a student</h1><p class="subheading">Add a learner to begin tracking their progress.</p></div></div>
+<section class="card form-card">
+    <div class="card-heading"><div><h2>Student details</h2><p class="form-note">All fields are required to create a student record.</p></div></div>
+    <form method="POST">
+        <div class="form-grid">
+            <div class="field full"><label for="name">Student name</label><input id="name" type="text" name="name" placeholder="e.g. Aisha Rahman" required></div>
+            <div class="field"><label for="student_id">Student ID</label><input id="student_id" type="text" name="student_id" placeholder="e.g. ST-1042" required></div>
+            <div class="field"><label for="course">Course / program</label><input id="course" type="text" name="course" placeholder="e.g. Web Development" required></div>
+            <div class="field"><label for="email">Email address</label><input id="email" type="email" name="email" placeholder="student@example.com" required></div>
+            <div class="field"><label for="phone">Phone number</label><input id="phone" type="text" name="phone" placeholder="7–15 digits" required></div>
+        </div>
+        <div class="form-actions"><button type="submit">Register student <span>&rarr;</span></button><a class="button secondary" href="{{ url_for('dashboard') }}">Cancel</a></div>
+    </form>
+</section>
+{% endblock %}
